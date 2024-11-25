@@ -2,8 +2,8 @@ import type { ConfigContext, ExpoConfig } from "@expo/config";
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "Expo Starter",
-  slug: "expostarter",
+  name: "Mindful Kids",
+  slug: "mindful-kids",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/images/icon.png",
@@ -34,15 +34,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     output: "single",
     favicon: "./assets/images/favicon.png",
   },
+  extra: {
+    eas: {
+      projectId: "3a1c7439-fa4b-4c81-8500-37fb7350a1ed"
+    },
+    router: {
+      origin: false,
+    },
+  },
   plugins: [["expo-router"]],
   experiments: {
     typedRoutes: true,
     baseUrl: "/expo-local-first-template",
   },
-  extra: {
-    eas: {
-      projectId: "",
-    },
-  },
-  owner: "*",
+  owner: "erics1337",
 });
