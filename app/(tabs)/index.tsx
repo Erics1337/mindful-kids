@@ -1,4 +1,4 @@
-import {View, Pressable} from "react-native";
+import {View, ScrollView, Pressable} from "react-native";
 import {useScrollToTop} from "@react-navigation/native";
 import {FlashList} from "@shopify/flash-list";
 import {eq} from "drizzle-orm";
@@ -13,6 +13,26 @@ import {useMigrationHelper} from "@/db/drizzle";
 import {useDatabase} from "@/db/provider";
 import {HabitCard} from "@/components/habit";
 import type {Habit} from "@/lib/storage";
+import {Card} from "@/components/ui/card";
+import {Star, Heart, Cloud} from "@/components/Icons";
+
+const achievements = [
+  {
+    icon: Star,
+    title: "Star Breather",
+    color: "text-yellow-500"
+  },
+  {
+    icon: Heart,
+    title: "Kind Heart",
+    color: "text-pink-500"
+  },
+  {
+    icon: Cloud,
+    title: "Peace Cloud",
+    color: "text-blue-500"
+  }
+];
 
 export default function Home() {
   const {success, error} = useMigrationHelper();
@@ -32,77 +52,41 @@ export default function Home() {
     );
   }
 
-  return <ScreenContent />;
-}
-
-function ScreenContent() {
-  const {db} = useDatabase();
-  const {data: habits, error} = useLiveQuery(
-    db?.select().from(habitTable).where(eq(habitTable.archived, false)),
-  );
-
-  const ref = React.useRef(null);
-  useScrollToTop(ref);
-
-  const renderItem = React.useCallback(
-    ({item}: {item: Habit}) => <HabitCard {...item} />,
-    [],
-  );
-
-  if (error) {
-    return (
-      <View className="flex-1 items-center justify-center bg-secondary/30">
-        <Text className="text-destructive pb-2 ">Error Loading data</Text>
-      </View>
-    );
-  }
   return (
-    <View className="flex flex-col basis-full bg-background  p-8">
+    <ScrollView className="flex-1 bg-background">
       <Stack.Screen
         options={{
-          title: "Habits",
+          title: "Mindful Kids",
         }}
       />
-      <FlashList
-        ref={ref}
-        className="native:overflow-hidden rounded-t-lg"
-        estimatedItemSize={49}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={() => (
-          <View>
-            <Text className="text-lg">Hi There 👋</Text>
-            <Text className="text-sm">
-              This example use sql.js on Web and expo/sqlite on native
-            </Text>
-            <Text className="text-sm">
-              If you change the schema, you need to run{" "}
-              <Text className="text-sm font-mono text-muted-foreground bg-muted">
-                bun db:generate
-              </Text>
-              <Text className="text-sm px-1">
-                then
-              </Text>
-              <Text className="text-sm font-mono text-muted-foreground bg-muted">
-                bun migrate
-              </Text>
-            </Text>
+      
+      <View className="p-6">
+        <View className="items-center mb-8">
+          <Text className="text-3xl font-bold mb-4">Welcome, Little Explorer!</Text>
+          <Text className="text-lg text-muted-foreground">Let's practice mindfulness together 🌟</Text>
+        </View>
+
+        <View className="mb-8">
+          <Text className="text-2xl font-bold mb-6">Your Achievements</Text>
+          <View className="flex-row justify-between">
+            {achievements.map((achievement, index) => {
+              const Icon = achievement.icon;
+              return (
+                <Card key={index} className="flex-1 mx-1 items-center p-4 bg-card">
+                  <Icon className={`h-8 w-8 ${achievement.color} mb-2`} />
+                  <Text className="text-sm font-medium text-center">{achievement.title}</Text>
+                </Card>
+              );
+            })}
           </View>
-        )}
-        ItemSeparatorComponent={() => <View className="p-2" />}
-        data={habits}
-        renderItem={renderItem}
-        keyExtractor={(_, index) => `item-${ index }`}
-        ListFooterComponent={<View className="py-4" />}
-      />
-      <View className="absolute web:bottom-20 bottom-10 right-8">
-        <Link href="/create" asChild>
-          <Pressable>
-            <View className="bg-primary justify-center rounded-full h-[45px] w-[45px]">
-              <Plus className="text-background self-center" />
-            </View>
-          </Pressable>
-        </Link>
+        </View>
+
+        <View className="mb-4">
+          <Text className="text-lg text-muted-foreground">
+            Tip: Take deep breaths and relax your mind. You're doing great! 🌈
+          </Text>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }

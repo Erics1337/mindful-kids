@@ -13,6 +13,7 @@ import {
   Baby,
   BadgeAlert,
   Bold,
+  Bug,
   Calendar,
   CalendarDays,
   Check,
@@ -31,8 +32,10 @@ import {
   Database,
   Ear,
   Fan,
+  Flower,
   GalleryHorizontal,
   Github,
+  Heart,
   Info,
   Italic,
   Lamp,
@@ -48,15 +51,19 @@ import {
   PlusCircle,
   Search,
   Sparkles,
+  Star,
   Sun,
   Table,
   Terminal,
   Underline,
   UserPlus,
   Users,
+  Wind,
   X,
 } from "lucide-react-native";
-import {cssInterop} from "nativewind";
+import { cssInterop } from "nativewind";
+
+
 function interopIcon(icon: LucideIcon) {
   cssInterop(icon, {
     className: {
@@ -68,10 +75,12 @@ function interopIcon(icon: LucideIcon) {
     },
   });
 }
+interopIcon(Heart);
 interopIcon(Settings);
 interopIcon(Sun);
 interopIcon(MoonStar);
 interopIcon(AlignJustify);
+interopIcon(Star);
 interopIcon(Activity);
 interopIcon(Airplay);
 interopIcon(AlarmClockIcon);
@@ -79,6 +88,7 @@ interopIcon(AlertCircle);
 interopIcon(AlignRight);
 interopIcon(Baby);
 interopIcon(BadgeAlert);
+interopIcon(Bug);
 interopIcon(Calendar);
 interopIcon(CircleUserRound);
 interopIcon(Database);
@@ -117,6 +127,8 @@ interopIcon(Plus);
 interopIcon(PlusCircle);
 interopIcon(UserPlus);
 interopIcon(Users);
+interopIcon(Wind);
+interopIcon(Flower);
 interopIcon(AlignCenter);
 interopIcon(Terminal);
 interopIcon(AlertTriangle);
@@ -138,6 +150,7 @@ export {
   Baby,
   BadgeAlert,
   Bold,
+  Bug,
   Calendar,
   CalendarDays,
   Check,
@@ -155,7 +168,9 @@ export {
   Database,
   Ear,
   Fan,
+  Flower,
   GalleryHorizontal,
+  Heart,
   Info,
   Italic,
   Lamp,
@@ -171,11 +186,13 @@ export {
   PlusCircle,
   Search,
   Sparkles,
+  Star,
   Sun,
   Table,
   Terminal,
   Underline,
   UserPlus,
   Users,
+  Wind,
   X,
 };
